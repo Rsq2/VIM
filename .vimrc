@@ -1,37 +1,28 @@
-   set nocompatible              " be iMproved, required
-   filetype off                  " required
-
-   set rtp+=~/.vim/bundle/Vundle.vim
-   call vundle#begin()
-
-   Plugin 'gmarik/Vundle.vim'
-   Plugin 'Valloric/YouCompleteMe'
-   Plugin 'The-NERD-Commenter'
-   Plugin 'Yggdroot/indentLine'
-   Plugin 'tpope/vim-fugitive'
-   " All of your Plugins must be added before the following line
-   call vundle#end()            " required
-   filetype plugin indent on    " required
-
+set nocompatible              " be iMproved, requiredfiletype off                  " required
+filetype off                  " required
+execute pathogen#infect()
+filetype plugin indent on    " required
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-o> :NERDTreeToggle<CR>
 
 "========THEME========"
-colorscheme badwolf
-let g:badwolf_css_props_highlight = 1
-let g:badwolf_darkgutter = 1
-let g:badwolf\_tabline = 2
+set background=dark
+colorscheme distinguished
 
 syntax enable
 set lazyredraw
-set guifont=Monospace 9
+set guifont=Monospace\ 9
 set number "line number"
 set showmatch "show matching bracket"
 set cursorline "highlights current line"
 
 set wildmenu "commandline autocomplete"
-
+set completeopt-=preview "kill scratchmenu
 "========TABS========="
 set tabstop=4 "visual spaces in a <tab>"
 set softtabstop=4 "number of spaces in a <tab> when editing"
+set shiftwidth=4
 autocmd FileType ruby setlocal tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2
 autocmd FileType ruby setlocal softtabstop=2
@@ -42,7 +33,9 @@ autocmd FileType html setlocal softtabstop=2
 set expandtab "turns <tab> into spaces"
 
 let g:indentLine_enabled = 1
-let g:indentLine_color_gui = '#998f84' "Lightest grey from Badwolf as line indents
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#050505'
+let g:indentLine_char = '|'
 
 "====FILE HANDLING===="
 filetype indent on
