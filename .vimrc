@@ -6,19 +6,28 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-o> :NERDTreeToggle<CR>
 
+"========FIXES========"
+let g:AutoClosePumvisible = {"ENTER": "", "ESC": ""} "compatibility fix between YCM and vim-autoclose
+
+
 "========THEME========"
 set background=dark
 colorscheme distinguished
-
 syntax enable
 set lazyredraw
-set guifont=Monospace\ 9
+
 set number "line number"
 set showmatch "show matching bracket"
 set cursorline "highlights current line"
 
 set wildmenu "commandline autocomplete"
 set completeopt-=preview "kill scratchmenu
+"=======AIRLINE======="
+let g:airline#extensions#tabline#enabled = 1   "extremely resource heavy
+let g:airline_theme='badwolf'
+set laststatus=2
+let g:airline_powerline_fonts = 1
+
 "========TABS========="
 set tabstop=4 "visual spaces in a <tab>"
 set softtabstop=4 "number of spaces in a <tab> when editing"
@@ -35,11 +44,12 @@ set expandtab "turns <tab> into spaces"
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#050505'
-let g:indentLine_char = '|'
+let g:indentLine_char = '┊'
 
 "====FILE HANDLING===="
 filetype indent on
-au FocusLost * :wa "Write all open files on tabout
+au FocusLost * silent! wa
+set autowriteall
 
 " Movement between tabs OR buffers
 nnoremap L :call MyNext()<CR>
@@ -90,6 +100,3 @@ imap <C-v> <C-r><C-o>+
 
 "====General Remaps====
 inoremap jj <ESC>
-
-"=Current Project Stuff="
-map <leader><TAB> :tabnew ~/Pytracer/<CR>
