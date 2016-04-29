@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, requiredfiletype off                  " required
 filetype off                  " required
+
 execute pathogen#infect()
 filetype plugin indent on    " required
 autocmd StdinReadPre * let s:std_in=1
@@ -8,7 +9,7 @@ map <C-o> :NERDTreeToggle<CR>
 
 "========FIXES========"
 let g:AutoClosePumvisible = {"ENTER": "", "ESC": ""} "compatibility fix between YCM and vim-autoclose
-
+:set backspace=indent,eol,start
 
 "========THEME========"
 set background=dark
@@ -22,6 +23,12 @@ set cursorline "highlights current line"
 
 set wildmenu "commandline autocomplete"
 set completeopt-=preview "kill scratchmenu
+
+"======HTML/CSS/JS====
+let g:javascript_enable_domhtmlcss = 1
+let g:javascript_ignore_javaScriptdoc = 1
+set foldmethod=syntax
+
 "=======AIRLINE======="
 let g:airline#extensions#tabline#enabled = 1   "extremely resource heavy
 let g:airline_theme='badwolf'
@@ -92,7 +99,8 @@ endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces() "for more useful diffs
 
 "======COPYPASTA======="
-set clipboard unnamed "use system clipboard
+set clipboard unnamedplus "use system clipboard
+
 map <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
